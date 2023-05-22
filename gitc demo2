@@ -1,0 +1,3 @@
+print("Parsed Username:", jairam)
+print("Parsed Email:", jai@opsera.io)
+print("Parsed Password: fdsffgdddhd")
