@@ -1,0 +1,26 @@
+import boto3
+
+# Configure the AWS credentials
+aws_access_key_id = 'jair'
+aws_secret_access_key = 'Yfdfdsfsdfsfsdfdsfdsfds'
+aws_region = 'us-west-2'  # Update with your desired region
+
+# Create an EC2 client
+ec2_client = boto3.client('ec2', region_name=aws_region, aws_access_key_id=aws_access_key_id,
+                          aws_secret_access_key=aws_secret_access_key)
+
+# Define the parameters for the instance creation
+instance_params = {
+    'ImageId': 'AMI_ID',  # Update with your desired Amazon Machine Image (AMI) ID
+    'InstanceType': 't2.micro',  # Update with your desired instance type
+    'KeyName': 'YOUR_KEY_PAIR_NAME',  # Update with your key pair name
+    'MinCount': 1,
+    'MaxCount': 1
+}
+
+# Create the EC2 instance
+response = ec2_client.run_instances(**instance_params)
+
+# Extract the instance ID from the response
+instance_id = response['Instances'][0]['InstanceId']
+print(f"Instance created with ID: {instance_id}")
