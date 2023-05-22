@@ -1,0 +1,27 @@
+import boto3
+
+# Configure the AWS credentials
+aws_access_key_id = 'ttttteenen'
+aws_secret_access_key = 'dfdsfdsfsfffgfgf'
+aws_region = 'us-west-2'  # Update with your desired region
+
+# Create an EC2 resource
+ec2_resource = boto3.resource('ec2', region_name=aws_region, aws_access_key_id=aws_access_key_id,
+                              aws_secret_access_key=aws_secret_access_key)
+
+# Define the parameters for the EBS volume creation
+volume_params = {
+    'AvailabilityZone': 'us-west-2a',  # Update with your desired availability zone
+    'Size': 20,  # Update with your desired volume size in GB
+    'VolumeType': 'gp2',  # Update with your desired volume type
+    # 'SnapshotId': 'SNAPSHOT_ID'  # Uncomment and update if you want to create a volume from a snapshot
+}
+
+# Create the EBS volume
+ebs_volume = ec2_resource.create_volume(**volume_params)
+
+# Wait for the volume to be available
+ebs_volume.wait_until_available()
+
+# Print the created volume ID
+print(f"EBS Volume created with ID: {ebs_volume.id}")
