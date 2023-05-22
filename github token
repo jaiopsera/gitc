@@ -1,0 +1,22 @@
+import requests
+
+# Replace 'YOUR_TOKEN' with your actual GitHub personal access token
+token = 'YOUR_TOKEN'
+
+headers = {
+    'Authorization': f'Token {token}',
+    'Accept': 'application/vnd.github.v3+json'
+}
+
+# Make a request to the GitHub API using the token for authentication
+response = requests.get('https://api.github.com/user', headers=headers)
+
+# Check the response status code
+if response.status_code == 200:
+    # Authentication successful
+    user_data = response.json()
+    username = user_data['login']
+    print(f"Authenticated as: {username}")
+else:
+    # Authentication failed
+    print("Authentication failed. Please check your token and try again.")
